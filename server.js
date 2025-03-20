@@ -5,7 +5,7 @@ import foodRouter from './routes/foodRoute.js';
 import userRouter from './routes/userRoute.js';
 import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
-import webhookRouter from './routes/webhook.js'; // Updated import for webhook route
+import router from './routes/webhook.js'; // Updated import for webhook route
 import dotenv from 'dotenv';
 
 // Load environment variables
@@ -30,7 +30,7 @@ app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 
 // Webhook route for Dialogflow
-app.use("/webhook", webhookRouter);
+app.use("/webhook", router);
 
 // Root endpoint
 app.get("/", (req, res) => {

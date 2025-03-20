@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import FoodItem from "../models/FoodItem.js";
+import Order from "../models/Order.js";
+
 const router = express.Router();
-const FoodItem = require("../models/FoodItem"); // Import FoodItem model
-const Order = require("../models/Order"); // Import Order model
 
 // Handle Dialogflow Webhook requests
 router.post("/dialogflow-webhook", async (req, res) => {
@@ -25,7 +26,6 @@ router.post("/dialogflow-webhook", async (req, res) => {
             console.error("Error fetching price details:", error);
             res.json({ fulfillmentText: "There was an issue fetching price details. Please try again later." });
         }
-
     } else if (intent === "OrderFood") {
         const { food_item, restaurant } = req.body.queryResult.parameters;
 
@@ -42,15 +42,12 @@ router.post("/dialogflow-webhook", async (req, res) => {
             await newOrder.save();
 
             res.json({ fulfillmentText: `Your order for ${food_item} at ${restaurant} has been placed successfully!` });
-
         } catch (error) {
             console.error("Error placing order:", error);
             res.json({ fulfillmentText: "There was an issue placing your order. Please try again later." });
         }
-
     } else {
         res.json({ fulfillmentText: "I didn't understand your request. Can you please repeat?" });
     }
 });
-
-module.exports = router;
+export default router;

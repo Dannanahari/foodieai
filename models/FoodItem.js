@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const FoodItemSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -6,4 +6,5 @@ const FoodItemSchema = new mongoose.Schema({
     restaurant: { type: String, required: true }
 });
 
-module.exports = mongoose.model("FoodItem", FoodItemSchema);
+export default mongoose.model("FoodItem", FoodItemSchema);
+
